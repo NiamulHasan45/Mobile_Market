@@ -81,19 +81,12 @@ const detailButton = (id) => {
             <div class="card-body">
                 <h4 class="card-title">${about.name}</h4>
                 <p id="release-date" class="card-text"></p>
-                <h6>Mian Features</h6>
-                <p><span class="fw-bold">Storage: </span>${about.mainFeatures.storage}</p>
-                <p><span class="fw-bold">Display Size: </span>${about.mainFeatures.displatySize}</p>
-                <p><span class="fw-bold">Chipset: </span>${about.mainFeatures.chipset}</p>
-                <p><span class="fw-bold">Memory: </span>${about.mainFeatures.memory}</p>
-                <p><span class="fw-bold">Storage: </span>${about.mainFeatures.storage}</p>
+                <h6>Main Features</h6>
+                <div id='main-features'>
+                </div>
                 <h6>Ohters</h6>
-                <p><span class="fw-bold">Bluetooth: </span>${about.others.Bluetooth}</p>
-                <p><span class="fw-bold">GPS: </span>${about.others.GPS}</p>
-                <p><span class="fw-bold">NFC: </span>${about.others.NFC}</p>
-                <p><span class="fw-bold">Radio: </span>${about.others.Radio}</p>
-                <p><span class="fw-bold">USB: </span>${about.others.USB}</p>
-                <p><span class="fw-bold">WLAN: </span>${about.others.WLAN}</p>
+                <div id='others-features'>
+                </div>
                 <div id='special-features'>
                     <h6>Sensors</h6>
                 </div>
@@ -101,6 +94,23 @@ const detailButton = (id) => {
             </div>
         </div>
     `;
+    // const features = about.mainFeatures;
+    console.log(about.mainFeatures);
+   
+    const FeaturesFuntion = (features, feature) => {
+        const getFeatures = document.getElementById(feature);
+        for (const property in features) {
+            const p = document.createElement('p');
+            p.innerText =`${property}: ${features[property]}`;
+            getFeatures.appendChild(p); 
+            console.log(`${property}: ${features[property]}`);
+          }
+    }
+
+    FeaturesFuntion(about.mainFeatures, 'main-features');
+    FeaturesFuntion(about.others, 'others-features');
+
+   
     // <p><span class="fw-bold">Sensors: </span>${about.mainFeatures.sensors[1]}</p>
     const specialFeatures = document.getElementById('special-features');
     for(const sensor of about.mainFeatures.sensors){
