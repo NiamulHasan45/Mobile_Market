@@ -1,4 +1,4 @@
-// fetch('https://openapi.programming-hero.com/api/phones?search=${searchText}')
+// Search and get the data
 
 const mobileDataAll = (searchText) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
@@ -15,10 +15,9 @@ const clicked = () => {
    
 }
 
-
+// Get search result show it to website
 
 const dataGroup = (dataReceive) => {
-    // console.log(dataReceive);
     const allMobileSection = document.getElementById('all-mobile-section');
     const specificSection = document.getElementById('specific-section');
     specificSection.textContent = '';
@@ -28,10 +27,11 @@ const dataGroup = (dataReceive) => {
     if(mobiles.length === 0){
         return allMobileSection.innerHTML = `<h1 class="text-center text-danger"> Sorry, Matched products are not found</h1>`;
     }
+    // Loop for every mobile
+
     for(let i=0; i<mobiles.length; i++){
         const mobile = mobiles[i];
         console.log(mobile);
-        // console.log(mobile.slug);
         if(i>=20){
             break;
         }
@@ -52,20 +52,21 @@ const dataGroup = (dataReceive) => {
     }
 }
 
+// After clicking the detail button, it will be called
+
 const detailButton = (id) => {
-    // console.log(id);
+
     const url2 = `https://openapi.programming-hero.com/api/phone/${id}`
     fetch(url2)
     .then(res => res.json())
     .then(about => oneItemDetail(about.data)) 
 }
 
+// from the item show all necessary information
+
  const oneItemDetail = (about) => {
     const specificSection = document.getElementById('specific-section');
-    // console.log(about.releaseDate);
    
-    // const div = document.createElement('div');
-    // div.className = 'col-12 mx-auto';
     specificSection.innerHTML = `
             <div class="card one-clicked-item mx-auto mt-3 p-3" style="width: 50rem;">
             <div class="d-flex">
@@ -80,16 +81,12 @@ const detailButton = (id) => {
                         </div>
                         <h6>Others</h6>
                         <div id='others-features'>
-                        </div>
-                        <div id='special-features'>
-                            <h6>Sensors</h6>
                         </div> 
                 </div>
             </div>
         </div>
     `;
-    // const features = about.mainFeatures;
-    // console.log(about.others);
+//    This fuction will get the main features and other features
    
     const FeaturesFuntion = (features, feature) => {
         const getFeatures = document.getElementById(feature);
@@ -107,13 +104,7 @@ const detailButton = (id) => {
     FeaturesFuntion(about.others, 'others-features');
 
    
-    // <p><span class="fw-bold">Sensors: </span>${about.mainFeatures.sensors[1]}</p>
-    const specialFeatures = document.getElementById('special-features');
-    for(const sensor of about.mainFeatures.sensors){
-        const span = document.createElement('span');
-        span.innerText = `${sensor}, `;
-        specialFeatures.appendChild(span);
-    }
+// This will show if relase date not found
 
     const releaseDate = document.getElementById('release-date');
     const releaseFuntion = () => {
