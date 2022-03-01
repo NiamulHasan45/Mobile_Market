@@ -25,6 +25,8 @@ const clicked = () => {
 const dataGroup = (dataReceive) => {
     // console.log(dataReceive);
     const allMobileSection = document.getElementById('all-mobile-section');
+    const specificSection = document.getElementById('specific-section');
+    specificSection.textContent = '';
     allMobileSection.textContent ='';
     const mobiles = dataReceive.data;
     //console.log(mobiles);
@@ -35,8 +37,13 @@ const dataGroup = (dataReceive) => {
 
 
 
-    for(const mobile of mobiles){
+    for(let i=0; i<=mobiles.length; i++){
+        const mobile = mobiles[i];
         //console.log(mobile);
+        // console.log(mobile.slug);
+        if(i>=20){
+            break;
+        }
         const div = document.createElement('div');
         div.className = 'one-mobile col-lg-4 col-md-12 mx-auto';
         div.innerHTML = `
@@ -45,7 +52,7 @@ const dataGroup = (dataReceive) => {
                     <div class="card-body">
                         <h5 class="card-title">${mobile.phone_name}</h5>
                         <p class="card-text">${mobile.brand}</p>
-                        <button onclick="detailButton()" class="btn btn-primary">Detail</button>
+                        <button onclick='detailButton("${mobile.slug}")' class="btn btn-primary">Detail</button>
                     </div>
                 </div>
                         `;
@@ -54,13 +61,64 @@ const dataGroup = (dataReceive) => {
     }
 }
 
-const detailButton = () => {
-    fetch('https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089')
+const detailButton = (id) => {
+    // console.log(id);
+    const url2 = `https://openapi.programming-hero.com/api/phone/${id}`
+    fetch(url2)
     .then(res => res.json())
-    .then(data => oneItemDetail(data))
+    .then(about => oneItemDetail(about.data)) 
 }
 
-const oneItemDetail = (data) => {
-    console.log(data);
+ const oneItemDetail = (about) => {
+    const specificSection = document.getElementById('specific-section');
+    // console.log(about.releaseDate);
+   
+    // const div = document.createElement('div');
+    // div.className = 'col-12 mx-auto';
+    specificSection.innerHTML = `
+            <div class="card mx-auto border-0 rounded mt-3 p-3" style="width: 25rem;">
+            <img src="${about.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title">${about.name}</h4>
+                <p id="release-date" class="card-text"></p>
+                <h6>Mian Features</h6>
+                <p><span class="fw-bold">Storage: </span>${about.mainFeatures.storage}</p>
+                <p><span class="fw-bold">Display Size: </span>${about.mainFeatures.displatySize}</p>
+                <p><span class="fw-bold">Chipset: </span>${about.mainFeatures.chipset}</p>
+                <p><span class="fw-bold">Memory: </span>${about.mainFeatures.memory}</p>
+                <p><span class="fw-bold">Storage: </span>${about.mainFeatures.storage}</p>
+                <h6>Ohters</h6>
+                <p><span class="fw-bold">Bluetooth: </span>${about.others.Bluetooth}</p>
+                <p><span class="fw-bold">GPS: </span>${about.others.GPS}</p>
+                <p><span class="fw-bold">NFC: </span>${about.others.NFC}</p>
+                <p><span class="fw-bold">Radio: </span>${about.others.Radio}</p>
+                <p><span class="fw-bold">USB: </span>${about.others.USB}</p>
+                <p><span class="fw-bold">WLAN: </span>${about.others.WLAN}</p>
+                <div id='special-features'>
+                    <h6>Sensors</h6>
+                </div>
+                
+            </div>
+        </div>
+    `;
+    // <p><span class="fw-bold">Sensors: </span>${about.mainFeatures.sensors[1]}</p>
+    const specialFeatures = document.getElementById('special-features');
+    for(const sensor of about.mainFeatures.sensors){
+        const span = document.createElement('span');
+        span.innerText = `${sensor}, `;
+        specialFeatures.appendChild(span);
+    }
 
-}
+    const releaseDate = document.getElementById('release-date');
+    const releaseFuntion = () => {
+        if(about.releaseDate === ''){
+            releaseDate.innerText = 'Release date not found';
+        }
+        else{
+            releaseDate.innerText = `${about.releaseDate}`; 
+        }
+    }
+    releaseFuntion();
+    
+
+} 
