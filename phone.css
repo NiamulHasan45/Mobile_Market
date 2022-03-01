@@ -1,3 +1,13 @@
 .one-mobile{
-    /* background-color: aquamarine; */
+     /* background-color: aquamarine;  */
+}
+.cards-group{
+    border: 1px solid rgb(183, 196, 201);
+    border-radius: 3%;
+    background-color: rgb(233, 241, 241);
+}
+.one-clicked-item{
+    border: 2px solid rgb(58, 73, 78);
+    border-radius: 3%;
+    background-color: rgb(233, 241, 241);
 }

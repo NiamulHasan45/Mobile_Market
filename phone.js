@@ -17,7 +17,6 @@ const clicked = () => {
 
 
 
-
 const dataGroup = (dataReceive) => {
     // console.log(dataReceive);
     const allMobileSection = document.getElementById('all-mobile-section');
@@ -39,12 +38,12 @@ const dataGroup = (dataReceive) => {
         const div = document.createElement('div');
         div.className = 'one-mobile col-lg-4 col-md-12 mx-auto';
         div.innerHTML = `
-                <div class="card mx-auto border-0 rounded mt-3 p-3" style="width: 18rem;">
-                    <img src="${mobile.image}" class="card-img-top" alt="No image found">
+                <div class="card cards-group mx-auto mt-3 p-3" style="width: 18rem;">
+                <img src="${mobile.image}" class="card-img-top" alt="No image found">
                     <div class="card-body">
-                        <h5 class="card-title">${mobile.phone_name}</h5>
-                        <p class="card-text">${mobile.brand}</p>
-                        <button onclick='detailButton("${mobile.slug}")' class="btn btn-primary">Detail</button>
+                        <h5 class="card-title text-center">${mobile.phone_name}</h5>
+                        <p class="card-text text-center">${mobile.brand}</p>
+                        <button onclick='detailButton("${mobile.slug}")' class="btn btn-primary d-flex justify-content-center mx-auto">Detail</button>
                     </div>
                 </div>
                         `;
@@ -68,21 +67,24 @@ const detailButton = (id) => {
     // const div = document.createElement('div');
     // div.className = 'col-12 mx-auto';
     specificSection.innerHTML = `
-            <div class="card mx-auto border-0 rounded mt-3 p-3" style="width: 25rem;">
-            <img src="${about.image}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h4 class="card-title">${about.name}</h4>
-                <p id="release-date" class="card-text"></p>
-                <h6>Main Features</h6>
-                <div id='main-features'>
+            <div class="card one-clicked-item mx-auto mt-3 p-3" style="width: 50rem;">
+            <div class="d-flex">
+                <div class='w-50 d-flex align-items-center' >
+                        <img src="${about.image}" class="card-img-top" alt="No images found">
+                 </div>
+                 <div class="card-body w-50">
+                        <h4 class="card-title">${about.name}</h4>
+                        <p id="release-date" class="card-text"></p>
+                        <h6>Main Features</h6>
+                        <div id='main-features'>
+                        </div>
+                        <h6>Others</h6>
+                        <div id='others-features'>
+                        </div>
+                        <div id='special-features'>
+                            <h6>Sensors</h6>
+                        </div> 
                 </div>
-                <h6>Others</h6>
-                <div id='others-features'>
-                </div>
-                <div id='special-features'>
-                    <h6>Sensors</h6>
-                </div>
-                
             </div>
         </div>
     `;
