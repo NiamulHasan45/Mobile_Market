@@ -1,5 +1,4 @@
 // Search and get the data
-
 const mobileDataAll = (searchText) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)

@@ -1,5 +1,10 @@
-.one-mobile{
-     /* background-color: aquamarine;  */
+#bg-image{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.2;
 }
 .cards-group{
     border: 1px solid rgb(183, 196, 201);
