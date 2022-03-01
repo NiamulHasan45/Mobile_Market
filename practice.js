@@ -10,16 +10,12 @@ const mobileDataAll = (searchText) => {
 const clicked = () => {
     const getMobileInput = document.getElementById('mobile-input');
     const mobileInput = getMobileInput.value;
-    getMobileInput.value = '';
     mobileDataAll(mobileInput);
+    getMobileInput.value = '';
+   
 }
 
-// const errorMessage = () =>{
-//    const getContainer = document.getElementById('container-id');
-//    getContainer.innerHTML = `<h1 class="text-center text-danger"> Sorry, Matched products are not found</h1>`;
 
-
-// }
 
 
 const dataGroup = (dataReceive) => {
@@ -29,17 +25,13 @@ const dataGroup = (dataReceive) => {
     specificSection.textContent = '';
     allMobileSection.textContent ='';
     const mobiles = dataReceive.data;
-    //console.log(mobiles);
-    console.log(mobiles.length);
+
     if(mobiles.length === 0){
         return allMobileSection.innerHTML = `<h1 class="text-center text-danger"> Sorry, Matched products are not found</h1>`;
     }
-
-
-
-    for(let i=0; i<=mobiles.length; i++){
+    for(let i=0; i<mobiles.length; i++){
         const mobile = mobiles[i];
-        //console.log(mobile);
+        console.log(mobile);
         // console.log(mobile.slug);
         if(i>=20){
             break;
@@ -48,7 +40,7 @@ const dataGroup = (dataReceive) => {
         div.className = 'one-mobile col-lg-4 col-md-12 mx-auto';
         div.innerHTML = `
                 <div class="card mx-auto border-0 rounded mt-3 p-3" style="width: 18rem;">
-                    <img src="${mobile.image}" class="card-img-top" alt="...">
+                    <img src="${mobile.image}" class="card-img-top" alt="No image found">
                     <div class="card-body">
                         <h5 class="card-title">${mobile.phone_name}</h5>
                         <p class="card-text">${mobile.brand}</p>
@@ -84,7 +76,7 @@ const detailButton = (id) => {
                 <h6>Main Features</h6>
                 <div id='main-features'>
                 </div>
-                <h6>Ohters</h6>
+                <h6>Others</h6>
                 <div id='others-features'>
                 </div>
                 <div id='special-features'>
@@ -95,15 +87,17 @@ const detailButton = (id) => {
         </div>
     `;
     // const features = about.mainFeatures;
-    console.log(about.mainFeatures);
+    // console.log(about.others);
    
     const FeaturesFuntion = (features, feature) => {
         const getFeatures = document.getElementById(feature);
+        if(typeof features === 'undefined'){
+            getFeatures.innerHTML= `<p>No result</p>`;
+        }
         for (const property in features) {
             const p = document.createElement('p');
             p.innerText =`${property}: ${features[property]}`;
             getFeatures.appendChild(p); 
-            console.log(`${property}: ${features[property]}`);
           }
     }
 
